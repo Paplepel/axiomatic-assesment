@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CompanyFactory extends Factory
@@ -11,6 +12,7 @@ class CompanyFactory extends Factory
         return [
             'name'                => $this->faker->company(),
             'registration_number' => strtoupper($this->faker->bothify('??######')),
+            'created_by'          => User::factory(),
         ];
     }
 }

@@ -11,7 +11,7 @@ class Branch extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['company_id', 'name', 'address'];
+    protected $fillable = ['company_id', 'name', 'address', 'created_by'];
 
     public function company(): BelongsTo
     {

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BranchFactory extends Factory
@@ -13,6 +14,7 @@ class BranchFactory extends Factory
             'company_id' => Company::factory(),
             'name'       => $this->faker->city() . ' Branch',
             'address'    => $this->faker->address(),
+            'created_by' => User::factory(),
         ];
     }
 }

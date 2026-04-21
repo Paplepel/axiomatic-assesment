@@ -10,7 +10,7 @@ class Company extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'registration_number'];
+    protected $fillable = ['name', 'registration_number', 'created_by'];
 
     public function branches(): HasMany
     {

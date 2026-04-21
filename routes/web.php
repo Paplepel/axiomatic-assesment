@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommissionNoteController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/companies/{company}/branches', [CompanyController::class, 'storeBranch'])->name('companies.branches.store');
     Route::put('/companies/{company}/branches/{branch}', [CompanyController::class, 'updateBranch'])->name('companies.branches.update');
     Route::delete('/companies/{company}/branches/{branch}', [CompanyController::class, 'destroyBranch'])->name('companies.branches.destroy');
+
+    // Employees (manager only)
+    Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+    Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+    Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+    Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 });
 
 require __DIR__.'/auth.php';

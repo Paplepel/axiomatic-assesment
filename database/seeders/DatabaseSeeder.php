@@ -15,15 +15,16 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // --- Permissions ---
-        $viewPerm   = Permission::firstOrCreate(['name' => 'view commission notes']);
-        $managePerm = Permission::firstOrCreate(['name' => 'manage commission notes']);
+        $viewPerm            = Permission::firstOrCreate(['name' => 'view commission notes']);
+        $managePerm          = Permission::firstOrCreate(['name' => 'manage commission notes']);
+        $manageCompaniesPerm = Permission::firstOrCreate(['name' => 'manage companies']);
 
         // --- Roles ---
         $viewerRole  = Role::firstOrCreate(['name' => 'viewer']);
         $managerRole = Role::firstOrCreate(['name' => 'manager']);
 
         $viewerRole->syncPermissions([$viewPerm]);
-        $managerRole->syncPermissions([$viewPerm, $managePerm]);
+        $managerRole->syncPermissions([$viewPerm, $managePerm, $manageCompaniesPerm]);
 
         // --- Users ---
         $admin = User::firstOrCreate(
@@ -41,18 +42,18 @@ class DatabaseSeeder extends Seeder
         // --- Company: Spar ---
         $spar = Company::firstOrCreate(
             ['name' => 'Spar'],
-            ['registration_number' => 'ZA123456']
+            ['registration_number' => 'ZA123456', 'created_by' => $admin->id]
         );
 
         // --- Two branches ---
         $bellville = Branch::firstOrCreate(
             ['company_id' => $spar->id, 'name' => 'Spar Bellville'],
-            ['address' => '1 Voortrekker Road, Bellville, Cape Town']
+            ['address' => '1 Voortrekker Road, Bellville, Cape Town', 'created_by' => $admin->id]
         );
 
         $claremont = Branch::firstOrCreate(
             ['company_id' => $spar->id, 'name' => 'Spar Claremont'],
-            ['address' => '15 Main Road, Claremont, Cape Town']
+            ['address' => '15 Main Road, Claremont, Cape Town', 'created_by' => $admin->id]
         );
 
         // --- Employees (one per branch) ---
@@ -62,6 +63,7 @@ class DatabaseSeeder extends Seeder
                 'company_id' => $spar->id,
                 'branch_id'  => $bellville->id,
                 'name'       => 'Alice Botha',
+                'created_by' => $admin->id,
             ]
         );
 
@@ -71,6 +73,7 @@ class DatabaseSeeder extends Seeder
                 'company_id' => $spar->id,
                 'branch_id'  => $claremont->id,
                 'name'       => 'Bob Dlamini',
+                'created_by' => $admin->id,
             ]
         );
 

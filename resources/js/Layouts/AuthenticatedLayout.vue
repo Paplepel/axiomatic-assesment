@@ -45,6 +45,13 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Companies
                                 </NavLink>
+                                <NavLink
+                                    v-if="$page.props.canManage"
+                                    :href="route('employees.index')"
+                                    :active="route().current('employees.*')"
+                                >
+                                    Employees
+                                </NavLink>
                             </div>
                         </div>
 
@@ -153,6 +160,13 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('companies.*')"
                         >
                             Companies
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.canManage"
+                            :href="route('employees.index')"
+                            :active="route().current('employees.*')"
+                        >
+                            Employees
                         </ResponsiveNavLink>
                     </div>
 

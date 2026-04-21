@@ -11,7 +11,7 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['company_id', 'branch_id', 'name', 'email'];
+    protected $fillable = ['company_id', 'branch_id', 'name', 'email', 'created_by'];
 
     public function company(): BelongsTo
     {

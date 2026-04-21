@@ -34,7 +34,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
-            'canManage' => $request->user()?->can('manage commission notes') ?? false,
+            'canManage' => $request->user()?->can('manage companies') ?? false,
         ];
     }
 }
