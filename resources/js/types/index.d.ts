@@ -48,5 +48,6 @@ export type PageProps<
     auth: {
         user: User;
     };
+    canManage: boolean;
 };
 

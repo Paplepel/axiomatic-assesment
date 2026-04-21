@@ -38,6 +38,13 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Commission Notes
                                 </NavLink>
+                                <NavLink
+                                    v-if="$page.props.canManage"
+                                    :href="route('companies.index')"
+                                    :active="route().current('companies.*')"
+                                >
+                                    Companies
+                                </NavLink>
                             </div>
                         </div>
 
@@ -139,6 +146,13 @@ const showingNavigationDropdown = ref(false);
                             :active="route().current('commission-notes.*')"
                         >
                             Commission Notes
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            v-if="$page.props.canManage"
+                            :href="route('companies.index')"
+                            :active="route().current('companies.*')"
+                        >
+                            Companies
                         </ResponsiveNavLink>
                     </div>
 
