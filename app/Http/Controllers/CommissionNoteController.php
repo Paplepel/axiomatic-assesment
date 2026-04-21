@@ -8,7 +8,6 @@ use App\Models\Branch;
 use App\Models\CommissionNote;
 use App\Models\Company;
 use App\Services\CommissionNoteService;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -53,22 +52,20 @@ class CommissionNoteController extends Controller
 
     public function update(UpdateCommissionNoteRequest $request, CommissionNote $commissionNote): RedirectResponse
     {
-        try {
-            $this->service->update($request->user(), $commissionNote, $request->validated());
-        } catch (AuthorizationException $e) {
-            abort(403, $e->getMessage());
-        }
+        // Authorization already enforced by UpdateCommissionNoteRequest (via policy).
+        // Service re-checks the rule as the application-layer source of truth.
+        $this->service->update($request->user(), $commissionNote, $request->validated());
 
         return back()->with('success', 'Commission note updated.');
     }
 
     public function destroy(Request $request, CommissionNote $commissionNote): RedirectResponse
     {
-        try {
-            $this->service->delete($request->user(), $commissionNote);
-        } catch (AuthorizationException $e) {
-            abort(403, $e->getMessage());
-        }
+        // Policy enforces: only author or manager may delete.
+        // Service re-checks the same rule as the application-layer source of truth.
+        $this->authorize('delete', $commissionNote);
+
+        $this->service->delete($request->user(), $commissionNote);
 
         return back()->with('success', 'Commission note deleted.');
     }

@@ -8,9 +8,10 @@ class UpdateCommissionNoteRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        // Fine-grained author-vs-manager check is enforced inside the service.
-        // Here we only gate on having at least view access (authenticated).
-        return $this->user() !== null;
+        // Delegates to CommissionNotePolicy::update(), which enforces:
+        // "only the original author OR a user with 'manage commission notes'".
+        // The service layer re-checks this rule as well (belt-and-suspenders).
+        return $this->user()->can('update', $this->route('commissionNote'));
     }
 
     public function rules(): array
