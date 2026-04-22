@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * ============================================================
+ *  Axiomatic Consultants — Technical Assessment
+ *  Done by Adriaan van Niekerk
+ * ============================================================
+ */
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;

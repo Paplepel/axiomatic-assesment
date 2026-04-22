@@ -1,3 +1,9 @@
+<!--
+  ============================================================
+   Axiomatic Consultants — Technical Assessment
+   Done by Adriaan van Niekerk
+  ============================================================
+-->
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import { Head, router, useForm } from '@inertiajs/vue3'
@@ -190,8 +196,8 @@ const totalEmployees = computed(() =>
                                             <td class="px-6 py-3 text-sm font-medium text-gray-900">{{ emp.name }}</td>
                                             <td class="px-6 py-3 text-sm text-gray-500">{{ emp.email ?? '—' }}</td>
                                             <td class="px-6 py-3 text-right text-sm">
-                                                <button class="mr-3 text-brand-navy hover:text-brand-red font-medium" @click="openEdit(emp)">Edit</button>
-                                                <button class="text-gray-400 hover:text-red-700 font-medium" @click="deleteEmployee(emp)">Delete</button>
+                                                <button v-if="emp.created_by === props.auth.user.id" class="mr-3 text-brand-navy hover:text-brand-red font-medium" @click="openEdit(emp)">Edit</button>
+                                                <button v-if="emp.created_by === props.auth.user.id" class="text-gray-400 hover:text-red-700 font-medium" @click="deleteEmployee(emp)">Delete</button>
                                             </td>
                                         </tr>
 

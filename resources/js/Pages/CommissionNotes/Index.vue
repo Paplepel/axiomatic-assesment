@@ -1,3 +1,9 @@
+<!--
+  ============================================================
+   Axiomatic Consultants — Technical Assessment
+   Done by Adriaan van Niekerk
+  ============================================================
+-->
 <script setup lang="ts">
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import { Head, router, useForm } from '@inertiajs/vue3'
@@ -100,7 +106,7 @@ const formattedAmount = (amount: string | number) =>
     Number(amount).toLocaleString('en-ZA', { style: 'currency', currency: 'ZAR' })
 
 const canEditNote = (note: CommissionNote) =>
-    props.canManage || note.created_by === props.auth.user.id
+    note.created_by === props.auth.user.id
 </script>
 
 <template>

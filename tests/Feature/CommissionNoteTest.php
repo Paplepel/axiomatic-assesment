@@ -186,7 +186,7 @@ test('non-author viewer cannot edit another users note', function () {
         ->assertForbidden();
 });
 
-test('manager can edit another users note', function () {
+test('manager cannot edit another users note', function () {
     setupPermissions();
     ['company' => $company, 'branch' => $branch, 'employee' => $employee] = makeContext();
 
@@ -208,7 +208,7 @@ test('manager can edit another users note', function () {
             'amount'       => 8000,
             'payment_date' => '2026-04-21',
         ])
-        ->assertRedirect();
+        ->assertForbidden();
 
-    $this->assertDatabaseHas('commission_notes', ['id' => $note->id, 'amount' => 8000]);
+    $this->assertDatabaseHas('commission_notes', ['id' => $note->id, 'amount' => 5000]);
 });

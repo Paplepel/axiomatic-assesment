@@ -19,11 +19,11 @@ class EmployeePolicy
 
     public function update(User $user, Employee $employee): bool
     {
-        return $user->can('manage employees') || $employee->created_by === $user->id;
+        return $employee->created_by === $user->id;
     }
 
     public function delete(User $user, Employee $employee): bool
     {
-        return $user->can('manage employees') || $employee->created_by === $user->id;
+        return $employee->created_by === $user->id;
     }
 }

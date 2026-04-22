@@ -14,11 +14,11 @@ class BranchPolicy
 
     public function update(User $user, Branch $branch): bool
     {
-        return $user->can('manage branches') || $branch->created_by === $user->id;
+        return $branch->created_by === $user->id;
     }
 
     public function delete(User $user, Branch $branch): bool
     {
-        return $user->can('manage branches') || $branch->created_by === $user->id;
+        return $branch->created_by === $user->id;
     }
 }

@@ -9,6 +9,7 @@ export interface Company {
     id: number;
     name: string;
     registration_number?: string;
+    created_by: number;
     branches: Branch[];
 }
 
@@ -17,6 +18,7 @@ export interface Branch {
     company_id: number;
     name: string;
     address?: string;
+    created_by: number;
 }
 
 export interface Employee {
@@ -25,6 +27,7 @@ export interface Employee {
     branch_id: number;
     name: string;
     email?: string;
+    created_by: number;
 }
 
 export interface CommissionNote {

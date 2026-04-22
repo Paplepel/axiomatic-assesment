@@ -47,7 +47,7 @@ class CommissionNoteService
      */
     public function update(User $user, CommissionNote $note, array $data): CommissionNote
     {
-        if ($note->created_by !== $user->id && ! $user->can('manage commission notes')) {
+        if ($note->created_by !== $user->id) {
             throw new AuthorizationException('You are not authorised to edit this note.');
         }
 
@@ -71,7 +71,7 @@ class CommissionNoteService
      */
     public function delete(User $user, CommissionNote $note): void
     {
-        if ($note->created_by !== $user->id && ! $user->can('manage commission notes')) {
+        if ($note->created_by !== $user->id) {
             throw new AuthorizationException('You are not authorised to delete this note.');
         }
 

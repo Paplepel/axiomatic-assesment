@@ -19,11 +19,11 @@ class CompanyPolicy
 
     public function update(User $user, Company $company): bool
     {
-        return $user->can('manage companies') || $company->created_by === $user->id;
+        return $company->created_by === $user->id;
     }
 
     public function delete(User $user, Company $company): bool
     {
-        return $user->can('manage companies') || $company->created_by === $user->id;
+        return $company->created_by === $user->id;
     }
 }
