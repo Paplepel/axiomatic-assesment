@@ -1,3 +1,12 @@
+# ---- Stage 1: Build frontend assets ----
+FROM node:20-alpine AS node-builder
+WORKDIR /var/www
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# ---- Stage 2: PHP-FPM app ----
 FROM php:8.4-fpm
 
 # Install system dependencies
@@ -19,6 +28,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 
 COPY . .
+COPY --from=node-builder /var/www/public/build ./public/build
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
