@@ -76,7 +76,7 @@ It also seeds one company (**Spar Group**) with two branches (Cape Town, Johanne
 
 ### 7. (Optional) Rebuild frontend assets
 
-If you change TypeScript/Vue files:
+Pre-built assets are included in the repository. Only needed if you modify TypeScript/Vue files:
 
 ```bash
 docker compose exec node npm run build
