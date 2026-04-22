@@ -43,27 +43,15 @@ cp .env.example .env      # already committed; skip if .env is present
 docker compose up -d
 ```
 
-All four services start automatically: `app` (PHP-FPM), `webserver` (Nginx), `db` (MariaDB 11), `node` (Vite build). The `db` container uses a health-check; the `app` container waits for it before accepting connections.
+All four services start automatically: `app` (PHP-FPM), `webserver` (Nginx), `db` (MariaDB 11), `node` (Vite build). The `db` container uses a health-check; the `app` container waits for it before accepting connections. PHP dependencies are installed and the `APP_KEY` is generated automatically on first start.
 
-### 3. Install PHP dependencies
-
-```bash
-docker compose exec app composer install
-```
-
-### 4. Generate application key
-
-```bash
-docker compose exec app php artisan key:generate
-```
-
-### 5. Run migrations
+### 3. Run migrations
 
 ```bash
 docker compose exec app php artisan migrate
 ```
 
-### 6. Seed demo data
+### 4. Seed demo data
 
 ```bash
 docker compose exec app php artisan db:seed
@@ -80,7 +68,7 @@ It also seeds one company (**Spar Group**) with two branches (Cape Town, Johanne
 - Alice Botha — R10 000
 - Bob Smith — R20 000
 
-### 7. (Optional) Rebuild frontend assets
+### 5. (Optional) Rebuild frontend assets
 
 If you change TypeScript/Vue files:
 
