@@ -113,6 +113,13 @@ class DatabaseSeeder extends Seeder
                 'notes'      => 'April commission payment — Bob Dlamini, Spar Claremont.',
             ]
         );
+
+        // --- Ensure all seed data is owned by Admin User ---
+        // firstOrCreate won't update rows that already existed before created_by was added.
+        Company::whereNull('created_by')->update(['created_by' => $admin->id]);
+        Branch::whereNull('created_by')->update(['created_by' => $admin->id]);
+        Employee::whereNull('created_by')->update(['created_by' => $admin->id]);
+        \App\Models\CommissionNote::whereNull('created_by')->update(['created_by' => $admin->id]);
     }
 }
 
