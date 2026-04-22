@@ -15,16 +15,24 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // --- Permissions ---
-        $viewPerm            = Permission::firstOrCreate(['name' => 'view commission notes']);
-        $managePerm          = Permission::firstOrCreate(['name' => 'manage commission notes']);
-        $manageCompaniesPerm = Permission::firstOrCreate(['name' => 'manage companies']);
+        $viewPerm             = Permission::firstOrCreate(['name' => 'view commission notes']);
+        $managePerm           = Permission::firstOrCreate(['name' => 'manage commission notes']);
+        $manageCompaniesPerm  = Permission::firstOrCreate(['name' => 'manage companies']);
+        $manageBranchesPerm   = Permission::firstOrCreate(['name' => 'manage branches']);
+        $manageEmployeesPerm  = Permission::firstOrCreate(['name' => 'manage employees']);
 
         // --- Roles ---
         $viewerRole  = Role::firstOrCreate(['name' => 'viewer']);
         $managerRole = Role::firstOrCreate(['name' => 'manager']);
 
         $viewerRole->syncPermissions([$viewPerm]);
-        $managerRole->syncPermissions([$viewPerm, $managePerm, $manageCompaniesPerm]);
+        $managerRole->syncPermissions([
+            $viewPerm,
+            $managePerm,
+            $manageCompaniesPerm,
+            $manageBranchesPerm,
+            $manageEmployeesPerm,
+        ]);
 
         // --- Users ---
         $admin = User::firstOrCreate(
