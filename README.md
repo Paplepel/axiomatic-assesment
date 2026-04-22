@@ -51,16 +51,10 @@ All four services start automatically: `app` (PHP-FPM), `webserver` (Nginx), `db
 docker compose exec app composer install
 ```
 
-### 5. Run migrations
+### 5. Migrate and seed
 
 ```bash
-docker compose exec app php artisan migrate
-```
-
-### 6. Seed demo data
-
-```bash
-docker compose exec app php artisan db:seed
+docker compose exec app php artisan migrate:fresh --seed
 ```
 
 This creates:
@@ -68,13 +62,14 @@ This creates:
 | Role    | Email                   | Password   |
 |---------|-------------------------|------------|
 | Manager | admin@example.com       | `password` |
+| Manager | davie@testmail.com      | `password` |
 | Viewer  | viewer@example.com      | `password` |
 
-It also seeds one company (**Spar Group**) with two branches (Cape Town, Johannesburg) and two commission notes:
+It also seeds one company (**Spar**) with two branches and two employees with commission notes:
 - Alice Botha — R10 000
-- Bob Smith — R20 000
+- Bob Dlamini — R20 000
 
-### 7. (Optional) Rebuild frontend assets
+### 6. (Optional) Rebuild frontend assets
 
 Pre-built assets are included in the repository. Only needed if you modify TypeScript/Vue files:
 
