@@ -32,7 +32,7 @@ A commission payment note management application built with **Laravel 13**, **In
 ### 1. Clone and configure
 
 ```bash
-git clone <repo-url> axiomatic-assessment
+git clone https://github.com/Paplepel/axiomatic-assesment axiomatic-assessment
 cd axiomatic-assessment
 cp .env.example .env      # already committed; skip if .env is present
 ```
